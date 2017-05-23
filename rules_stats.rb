@@ -34,7 +34,7 @@ require 'json'
 # response = conn.get("#{stream_label}.json")
 
 # Read file, parse, extract and store rules in 'rules' array
-file = File.read("./files/falcon_social_rules.json")
+file = File.read("./files/{RULES-FILE}.json")
 json = JSON.parse(file)
 rules = json["rules"]
 
