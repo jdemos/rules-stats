@@ -1,41 +1,51 @@
-# # ----------------------------------------
-# # Read rules file and produce stats on it
-# # ----------------------------------------
+# ----------------------------------------
+# GET a set of rules and generate stats
+# ----------------------------------------
 
 require 'json'
-# require 'faraday'
-# require 'optparse'
-# require 'yaml'
+require 'faraday'
+require 'optparse'
+require 'yaml'
 
-# # # # Add in ability to make GET request to pull rules
+# Path to yaml file with credentials
+config = YAML.load_file('./config/p/private.yml')
 
-# # # config = YAML.load_file('credentials.yml')
+username = config['username']
+password = config['password']
+account_name = config['account_name']
+stream_label = config['stream_label']
 
-# # # username = config['username']
-# # # password = config['password']
+# # Option Parser code
+# options = {}
 
-# # # # Option Parser code
-# # # options = {}
+# parser = OptionParser.new do |opts|
+# 	opts.on('-t', '--tweet tweet') do |tweet|
+# 		options[:tweet] = tweet;
+# 	end
+# end
 
-# # # parser = OptionParser.new do |opts|
-# # # 	opts.on('-t', '--tweet tweet') do |tweet|
-# # # 		options[:tweet] = tweet;
-# # # 	end
-# # # end
+# parser.parse!
 
-# # parser.parse!
+# Make the request
+conn = Faraday.new(url: "https://gnip-api.twitter.com")
+conn.basic_auth(username, password)
+response = conn.get("/rules/powertrack/accounts/#{account_name}/publishers/twitter/#{stream_label}.json")
 
-# account_name = "INSERT"
-# stream_label = "INSERT"
+jresp = JSON.parse(response.body)
 
-# # Make the request
-# conn = Faraday.new(url: "https://gnip-api.twitter.com/rules/powertrack/accounts/#{account_name}/publishers/twitter/")
-# conn.basic_auth(username, password)
-# response = conn.get("#{stream_label}.json")
+sent = jresp['sent'].gsub(/\W+/, '')
+datestamp = sent[0..-7]
+
+fname = "#{stream_label}_rules_#{datestamp}.json"
+
+rules_file = File.open("./files/#{fname}", "w+")
+rules_file.puts response.body
+rules_file.close
 
 # Read file, parse, extract and store rules in 'rules' array
-file = File.read("./files/{RULES-FILE}.json")
+file = File.read("./files/#{fname}")
 json = JSON.parse(file)
+
 rules = json["rules"]
 
 # Initialize counter and sum variables
