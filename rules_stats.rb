@@ -4,7 +4,6 @@
 
 require 'json'
 require 'faraday'
-require 'optparse'
 require 'yaml'
 
 # Path to yaml file with credentials
@@ -14,17 +13,6 @@ username = config['username']
 password = config['password']
 account_name = config['account_name']
 stream_label = config['stream_label']
-
-# # Option Parser code
-# options = {}
-
-# parser = OptionParser.new do |opts|
-# 	opts.on('-t', '--tweet tweet') do |tweet|
-# 		options[:tweet] = tweet;
-# 	end
-# end
-
-# parser.parse!
 
 # Make the request
 conn = Faraday.new(url: "https://gnip-api.twitter.com")
