@@ -18,12 +18,7 @@ password = config['password']
 account_name = config['account_name']
 stream_label = config['stream_label']
 
-# # Make the request
-# conn = Faraday.new(url: "https://gnip-api.twitter.com")
-# conn.basic_auth(username, password)
-# response = conn.get("/rules/powertrack/accounts/#{account_name}/publishers/twitter/#{stream_label}.json")
-
-
+# Make the request
 conn = Faraday.new(url: "https://gnip-api.twitter.com")
 conn.basic_auth(username, password)
 response = conn.get "/rules/powertrack/accounts/#{account_name}/publishers/twitter/#{stream_label}.json" do |req|
@@ -64,5 +59,4 @@ while counter < limit
 end
 
 average = sum / limit
-puts "Avg rule length: #{average}", "Min rule lenght: #{rule_length.min}", "Max rule length: #{rule_length.max}"
-
+puts "Number of rules: #{limit}", "Avg rule length: #{average}", "Min rule lenght: #{rule_length.min}", "Max rule length: #{rule_length.max}"
