@@ -35,12 +35,15 @@ datestamp = sent[0..-7]
 
 file_name = "#{stream_label}_rules_#{datestamp}.json"
 
-rules_file = File.open("./files/#{file_name}", "w+")
+directory_name = "outbox"
+Dir.mkdir(directory_name) unless File.exists?(directory_name)
+
+rules_file = File.open("./outbox/#{file_name}", "w+")
 rules_file.puts response.body
 rules_file.close
 
 # Read file, parse, extract and store rules in 'rules' array
-file = File.read("./files/#{file_name}")
+file = File.read("./outbox/#{file_name}")
 json = JSON.parse(file)
 
 rules = json["rules"]
