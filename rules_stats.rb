@@ -22,7 +22,7 @@ stream_label = config['stream_label']
 conn = Faraday.new(url: "https://gnip-api.twitter.com")
 conn.basic_auth(username, password)
 response = conn.get "/rules/powertrack/accounts/#{account_name}/publishers/twitter/#{stream_label}.json" do |req|
-  req.headers['X-On-Behalf-Of'] = 'jim'
+  req.headers['X-On-Behalf-Of'] = "#{account_name}"
 end
 
 # # Print the response - useful when debugging
