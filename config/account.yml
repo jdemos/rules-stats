@@ -1,2 +1,4 @@
-username: # email@domain.com
-password: # password
+username: # gnip username (e.g., email@domain.com)
+password: # gnip account password
+target_account_name: # case sensitive account name of the ruleset to be retrieved (e.g., Testing)
+target_stream_label: # stream label (e.g., prod)

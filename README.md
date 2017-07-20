@@ -4,7 +4,11 @@ GET a rule set and generate statistics such as average rule length on the retrie
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes:
+
+1. Clone respository.
+2. Run `bundle install`. See project Gemfile for required gems.
+3. Configure the config/account.yml file with account details target stream
 
 ### Prerequisites
 

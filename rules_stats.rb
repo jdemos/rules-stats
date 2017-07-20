@@ -15,8 +15,9 @@ end
 
 username = config['username']
 password = config['password']
-account_name = config['account_name']
-stream_label = config['stream_label']
+account_name = config['target_account_name']
+stream_label = config['target_stream_label']
+format = "----------------------------------------------"
 
 # Make the request
 conn = Faraday.new(url: "https://gnip-api.twitter.com")
@@ -35,6 +36,7 @@ datestamp = sent[0..-7]
 
 file_name = "#{stream_label}_rules_#{datestamp}.json"
 
+# Create 'outbox' dir if it doesn't exist
 directory_name = "outbox"
 Dir.mkdir(directory_name) unless File.exists?(directory_name)
 
@@ -62,4 +64,4 @@ while counter < limit
 end
 
 average = sum / limit
-puts "Number of rules: #{limit}", "Avg rule length: #{average}", "Min rule lenght: #{rule_length.min}", "Max rule length: #{rule_length.max}"
+puts "#{format}", "Account name: #{account_name} | Stream: '#{stream_label}'", "#{format}", "Number of rules: #{limit}", "Avg rule length: #{average}", "Min rule lenght: #{rule_length.min}", "Max rule length: #{rule_length.max}"
