@@ -34,7 +34,7 @@ jresp = JSON.parse(response.body)
 sent = jresp['sent'].gsub(/\W+/, '')
 datestamp = sent[0..-7]
 
-file_name = "#{stream_label}_rules_#{datestamp}.json"
+file_name = "#{account_name}_#{stream_label}_#{datestamp}.json"
 
 # Create 'outbox' dir if it doesn't exist
 directory_name = "outbox"
