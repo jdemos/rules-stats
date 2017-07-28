@@ -16,7 +16,7 @@ Run on the command line:
 
 Alternatively, you can pass a different config file path as the first command line argument (ARGV[0]).
 
-`$ ruby rules_stats.rb 'config/some-other-file.yml'
+`$ ruby rules_stats.rb 'config/some-other-file.yml'`
 
 ## License
 
